@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    app:cardElevation="4dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/menu_image"
+            android:scaleType="centerCrop"
+            android:padding="1sp"
+            android:src="@drawable/background"
+            />
+        <TextView
+            android:id="@+id/menu_Name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name_of_menu"
+            android:textColor="@android:color/white"
+            android:background="#4f0e0d0e"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:layout_above="@+id/menu_price"/>
+        <TextView
+            android:layout_width="150dp"
+            android:layout_height="40sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:background="#4f0e0d0e"
+            android:id="@+id/empty"/>
+        <TextView
+            android:id="@+id/Rs"
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:layout_toRightOf="@+id/empty"
+            android:layout_alignParentBottom="true"
+            android:background="#4f0e0d0e"
+            android:text="Rs.  "
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:text="Price of Item"
+            android:id="@+id/menu_price"
+            android:textColor="@android:color/white"
+            android:background="#4f0e0d0e"
+            android:textSize="20sp"
+            android:layout_toRightOf="@+id/Rs"
+
+            android:layout_alignParentBottom="true"
+            />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:text="@string/add"
+            android:id="@+id/addButton"
+            android:textColor="@android:color/white"
+            android:background="#4f0e0d0e"
+            android:textSize="20sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

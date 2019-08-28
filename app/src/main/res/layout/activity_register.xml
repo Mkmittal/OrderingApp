@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_centerHorizontal="true"
+    android:background="@drawable/background">
+    <ImageView
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/image_logo"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/image_logo"
+            android:elevation="5dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"
+            android:id="@+id/register_username"
+            android:layout_marginTop="20dp"
+            android:hint="@string/phone_number"
+            android:inputType="phone" />
+        <EditText
+            android:layout_centerHorizontal="true"
+            android:textColorHint="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="5dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/register_username"
+            android:id="@+id/register_name"
+            android:hint="@string/full_name"
+            android:textColor="#FFFFFF"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:textColorHint="#FFFFFF"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/register_name"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_password"
+            android:layout_marginTop="10dp"
+            android:elevation="5dp"
+            android:textColor="#FFFFFF"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:layout_gravity="center" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/register_password"
+            android:textColorHint="#FFFFFF"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_password2"
+            android:textColor="#FFFFFF"
+            android:elevation="5dp"
+            android:layout_gravity="center"
+            android:inputType="textPassword"
+            android:hint="@string/confirm_password"/>
+        <Button
+        android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:layout_below="@+id/register_password2"
+            android:background="#FFFFFF"
+        android:layout_height="wrap_content"
+        android:id="@+id/register_SIGNUP"
+        android:text="@string/signup" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/register_SIGNUP"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="120dp"
+        android:id="@+id/t1"
+        android:textColor="#FFFFFF"
+        android:text="@string/already_registered" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_login"
+            android:textStyle="bold"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_below="@+id/register_SIGNUP"
+            android:layout_toEndOf="@+id/t1"
+            android:textColor="#FFFFFF"
+            android:text="@string/login" />
+</RelativeLayout>
