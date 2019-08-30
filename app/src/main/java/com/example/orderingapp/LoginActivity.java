@@ -1,5 +1,6 @@
 package com.example.orderingapp;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.example.orderingapp.Common.Common;
@@ -8,6 +9,7 @@ import com.example.orderingapp.Model.Order;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.preference.PreferenceManager;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -17,6 +19,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,61 +53,68 @@ public class LoginActivity extends AppCompatActivity
     private RecyclerView.LayoutManager layoutManager;
     private LoginAdapter mAdapter;
     public int number=0;
+    public FirebaseAuth firebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         number=0;
-        setContentView(R.layout.activity_login);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        boolean previouslyStarted = prefs.getBoolean(getString(R.string.pref_previously_started), false);
+        if(!previouslyStarted) {
+            SharedPreferences.Editor edit = prefs.edit();
+            edit.putBoolean(getString(R.string.pref_previously_started), Boolean.TRUE);
+            edit.apply();
+            showHelp();
+        }
+            setContentView(R.layout.activity_login);
+            Toolbar toolbar = findViewById(R.id.toolbar);
+            toolbar.setTitle("Menu");
+            setSupportActionBar(toolbar);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Menu");
-        setSupportActionBar(toolbar);
+            //Initializing firebase
+            firebase = FirebaseAuth.getInstance();
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            category = firebaseDatabase.getReference("Category");
 
-        //Initializing firebase
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        category = firebaseDatabase.getReference("Category");
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(Common.cart.size() == 0){
-                    Snackbar.make(view, "Add Items First", Snackbar.LENGTH_LONG)
-                            .setAction("Action", null).show();
+            FloatingActionButton fab = findViewById(R.id.fab);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (Common.cart.size() == 0) {
+                        Snackbar.make(view, "Add Items First", Snackbar.LENGTH_LONG)
+                                .setAction("Action", null).show();
+                    } else {
+                        Intent toCart = new Intent(LoginActivity.this, Cart.class);
+                        startActivity(toCart);
+                    }
                 }
-                else
-                {
-                    Intent toCart = new Intent(LoginActivity.this,Cart.class);
-                    startActivity(toCart);
+            });
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                    this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+            drawer.addDrawerListener(toggle);
+            toggle.syncState();
+            navigationView.setNavigationItemSelectedListener(this);
+
+            //Set Name for User
+            View headerView = navigationView.getHeaderView(0);
+            textFullName = headerView.findViewById(R.id.textFullName);
+            textFullName.setText(Common.currentUser.getName());
+            createArrayList();
+            category.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    loadMenu(dataSnapshot);
                 }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
                 }
-        });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        navigationView.setNavigationItemSelectedListener(this);
-
-        //Set Name for User
-        View headerView = navigationView.getHeaderView(0);
-        textFullName = headerView.findViewById(R.id.textFullName);
-        textFullName.setText(Common.currentUser.getName());
-        createArrayList();
-        category.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                loadMenu(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
+            });
+        }
 
     private void createRecyclerView() {
         recyclerMenu = findViewById(R.id.recycler_menu);
@@ -187,11 +197,18 @@ public class LoginActivity extends AppCompatActivity
             startActivity(toOrders);
 
         } else if (id == R.id.nav_logout) {
-
+            FirebaseAuth fAuth = FirebaseAuth.getInstance();
+            fAuth.signOut();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void showHelp()
+    {
+        Intent intent=new Intent(LoginActivity.this,FirstTime.class);
+        startActivity(intent);
+        finish();
     }
 }

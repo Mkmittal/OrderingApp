@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText mTextOtp;
     private Button mButtonVerify;
     private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallBacks;
-    private FirebaseAuth mAuth;
+    public FirebaseAuth mAuth;
     private String verificationCode;
     private User mUser;
     private DatabaseReference table_user;
@@ -136,8 +136,9 @@ public class MainActivity extends AppCompatActivity {
                 String code = phoneAuthCredential.getSmsCode();
                 if (code != null) {
                     mTextOtp.setText(code);
-                    //verifying the code
-                    verify(code);
+                    Intent toLogedIn = new Intent(MainActivity.this, LoginActivity.class);
+                    Common.currentUser = mUser;
+                    startActivity(toLogedIn);
                 }
             }
 
@@ -146,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Verification Failed", Toast.LENGTH_SHORT).show();
             }
             @Override
-            public void onCodeSent(String s,PhoneAuthProvider.ForceResendingToken forceResendingToken)
+            public void onCodeSent(String s,@NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken)
             {
                 super.onCodeSent(s,forceResendingToken);
                 verificationCode = s;
@@ -185,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
                     snackbar.setAction("Dismiss", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-
                         }
                     });
                     snackbar.show();
