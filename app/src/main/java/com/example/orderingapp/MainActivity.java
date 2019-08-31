@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     mTextOtp.setText(code);
                     Intent toLogedIn = new Intent(MainActivity.this, LoginActivity.class);
                     Common.currentUser = mUser;
+                    Common.customerId = mTextUsername.getText().toString();
                     startActivity(toLogedIn);
                 }
             }

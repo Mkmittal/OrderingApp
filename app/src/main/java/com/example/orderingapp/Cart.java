@@ -47,7 +47,9 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent toPayment = new Intent(Cart.this,Payment.class);
+                Common.cartTotal=txtTotalPrice.getText().toString();
                 startActivity(toPayment);
+
             }
         });
     }

@@ -82,7 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         else
                                         {
                                             mDialog.dismiss();
-                                            User user = new User(mTextFullName.getText().toString(), mTextPassword.getText().toString());
+                                            User user = new User(mTextFullName.getText().toString(), mTextPassword.getText().toString(),"0");
                                             table_user.child(mTextUsername.getText().toString()).setValue(user);
                                             Toast.makeText(RegisterActivity.this, "REGISTERED SUCCESSFULLY", Toast.LENGTH_SHORT).show();
                                             mTextPassword.getText().clear();
