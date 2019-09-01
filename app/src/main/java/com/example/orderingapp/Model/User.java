@@ -1,5 +1,7 @@
 package com.example.orderingapp.Model;
 
+import com.example.orderingapp.Common.Common;
+
 public class User {
     private String Name;
     private String Password;
@@ -37,5 +39,10 @@ public class User {
 
     public void setPassword(String password) {
         Password = password;
+    }
+
+    public void updateOrderId()
+    {
+        setOrderNo(String.valueOf(Integer.parseInt(Common.currentUser.getOrderNo())+1));
     }
 }

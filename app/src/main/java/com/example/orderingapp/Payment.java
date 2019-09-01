@@ -1,6 +1,5 @@
 package com.example.orderingapp;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,7 +9,8 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderingapp.Common.Common;
-import com.google.android.gms.tasks.Task;
+import com.example.orderingapp.Model.User;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.paytm.pgsdk.PaytmOrder;
@@ -23,17 +23,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import android.app.ProgressDialog;
-
-/**
- * Created by kamal_bunkar on 15-01-2019.
- */
 
 
 public class Payment extends AppCompatActivity implements PaytmPaymentTransactionCallback {
     int orid=Integer.parseInt(Common.currentUser.getOrderNo())+12;
 
-    //Task<Void> dr = Common.table_user.child(Common.customerId).setValue(++orid);
     String custid= Common.customerId, orderId=(Common.customerId+orid), mid="";
 
     String amounttopepaid= Common.cartTotal;
@@ -44,6 +38,10 @@ public class Payment extends AppCompatActivity implements PaytmPaymentTransactio
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main);
         //initOrderId();
+        Common.currentUser.updateOrderId();
+        FirebaseDatabase fb=FirebaseDatabase.getInstance();
+        DatabaseReference dr=fb.getReference("User");
+        dr.child(Common.customerId).child("OrderNo").setValue(Common.currentUser.getOrderNo());
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
 
