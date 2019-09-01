@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
                     mTextOtp.setText(code);
                     Intent toLogedIn = new Intent(MainActivity.this, LoginActivity.class);
                     Common.currentUser = mUser;
+                    //Common.table_user = table_user;
                     Common.customerId = mTextUsername.getText().toString();
                     startActivity(toLogedIn);
                 }
@@ -145,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onVerificationFailed(@NonNull FirebaseException e) {
+                e.printStackTrace();
                 Toast.makeText(MainActivity.this, "Verification Failed", Toast.LENGTH_SHORT).show();
             }
             @Override

@@ -3,7 +3,7 @@ package com.example.orderingapp.Model;
 public class User {
     private String Name;
     private String Password;
-    private static String orderNo;
+    private String orderNo;
 
     public User(){
     }

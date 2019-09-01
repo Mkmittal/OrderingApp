@@ -10,6 +10,9 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.orderingapp.Common.Common;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.paytm.pgsdk.PaytmOrder;
 import com.paytm.pgsdk.PaytmPGService;
 import com.paytm.pgsdk.PaytmPaymentTransactionCallback;
@@ -26,11 +29,15 @@ import android.app.ProgressDialog;
  * Created by kamal_bunkar on 15-01-2019.
  */
 
-public class Payment extends AppCompatActivity implements PaytmPaymentTransactionCallback {
 
-    String custid= Common.customerId, orderId=(Common.customerId+Common.currentUser.getOrderNo()), mid="";
+public class Payment extends AppCompatActivity implements PaytmPaymentTransactionCallback {
+    int orid=Integer.parseInt(Common.currentUser.getOrderNo())+12;
+
+    //Task<Void> dr = Common.table_user.child(Common.customerId).setValue(++orid);
+    String custid= Common.customerId, orderId=(Common.customerId+orid), mid="";
 
     String amounttopepaid= Common.cartTotal;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,6 +128,7 @@ public class Payment extends AppCompatActivity implements PaytmPaymentTransactio
                     Payment.this  );
 
 
+
         }
 
     }
@@ -128,7 +136,12 @@ public class Payment extends AppCompatActivity implements PaytmPaymentTransactio
 
     @Override
     public void onTransactionResponse(Bundle bundle) {
+
         Log.e("checksum ", " respon true " + bundle.toString());
+        Common.cart.clear();
+        Intent intent= new Intent(Payment.this,Orders.class);
+        startActivity(intent);
+
     }
 
     @Override
