@@ -138,6 +138,7 @@ public class LoginActivity extends AppCompatActivity
             {
                 number++;
                 Category foodId = values.get(position);
+                foodId.setQUANTITY(Common.quantity);
                 Common.cart.add(new Order(foodId.getImage(),foodId.getName(),foodId.getQUANTITY(),foodId.getPrice()));
                 Toast.makeText(LoginActivity.this,"Added to Cart",Toast.LENGTH_SHORT).show();
             }

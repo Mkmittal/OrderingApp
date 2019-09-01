@@ -10,5 +10,6 @@ public class Common {
     public static ArrayList<Order> cart=new ArrayList<>();
     public static boolean firstTimeLogin = true;
     public static String customerId;
+    public static String quantity;
     public static String cartTotal;
 }

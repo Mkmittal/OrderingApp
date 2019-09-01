@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.orderingapp.Common.Common;
 import com.example.orderingapp.Model.Category;
 import com.squareup.picasso.Picasso;
 
@@ -38,6 +39,7 @@ public class LoginAdapter extends RecyclerView.Adapter<LoginAdapter.MenuViewHold
         public ImageView imageView;
         public Button addButton;
         public TextView txtPrice;
+        public EditText quantity;
 
 
         public MenuViewHolder(@NonNull View itemView,final OnItemClickListener listener) {
@@ -46,6 +48,7 @@ public class LoginAdapter extends RecyclerView.Adapter<LoginAdapter.MenuViewHold
                 imageView = itemView.findViewById(R.id.menu_image);
                 addButton = itemView.findViewById(R.id.addButton);
                 txtPrice = itemView.findViewById(R.id.menu_price);
+                quantity = itemView.findViewById(R.id.menu_Quantity);
 
                 itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -66,6 +69,7 @@ public class LoginAdapter extends RecyclerView.Adapter<LoginAdapter.MenuViewHold
                         int position = getAdapterPosition();
                         if (position != RecyclerView.NO_POSITION)
                         {
+                            Common.quantity = quantity.getText().toString();
                             listener.onAddClick(position);
                         }
                     }
@@ -92,6 +96,7 @@ public class LoginAdapter extends RecyclerView.Adapter<LoginAdapter.MenuViewHold
         Category currentItem = values.get(position);
 
         holder.textMenuName.setText(currentItem.getName());
+        holder.quantity.setText(currentItem.getQUANTITY());
         holder.txtPrice.setText(currentItem.getPrice());
         Glide.with(mcontext).load(currentItem.getImage()).into(holder.imageView);
     }

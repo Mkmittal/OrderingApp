@@ -27,7 +27,7 @@
             android:textAlignment="center"
             android:layout_above="@+id/menu_price"/>
         <TextView
-            android:layout_width="150dp"
+            android:layout_width="40dp"
             android:layout_height="40sp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
@@ -44,7 +44,7 @@
             android:textColor="@android:color/white"
             android:textSize="20sp" />
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="40sp"
             android:text="Price of Item"
             android:id="@+id/menu_price"
@@ -52,7 +52,6 @@
             android:background="#4f0e0d0e"
             android:textSize="20sp"
             android:layout_toRightOf="@+id/Rs"
-
             android:layout_alignParentBottom="true"
             />
 
@@ -67,5 +66,30 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="40sp"
+            android:id="@+id/menu_Quantity_text"
+            android:textColor="@android:color/white"
+            android:background="#4f0e0d0e"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:text="@string/quantity"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/menu_price"
+            />
+        <EditText
+            android:id="@+id/menu_Quantity"
+            android:layout_width="30dp"
+            android:layout_height="40sp"
+            android:textColor="@android:color/white"
+            android:background="#4f0e0d0e"
+            android:textSize="20sp"
+            android:text="1"
+            android:textAlignment="center"
+            android:layout_alignParentBottom="true"
+            android:layout_toEndOf="@id/menu_Quantity_text"
+            android:inputType="number" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
