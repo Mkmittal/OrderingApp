@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.example.orderingapp.Common.Common;
 import com.example.orderingapp.Model.Category;
-import com.example.orderingapp.Model.Order;
+import com.example.orderingapp.Model.Items;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -37,7 +37,6 @@ import android.view.Menu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity
@@ -139,7 +138,7 @@ public class LoginActivity extends AppCompatActivity
                 number++;
                 Category foodId = values.get(position);
                 foodId.setQUANTITY(Common.quantity);
-                Common.cart.add(new Order(foodId.getImage(),foodId.getName(),foodId.getQUANTITY(),foodId.getPrice()));
+                Common.cart.add(new Items(foodId.getImage(),foodId.getName(),foodId.getQUANTITY(),foodId.getPrice()));
                 Toast.makeText(LoginActivity.this,"Added to Cart",Toast.LENGTH_SHORT).show();
             }
 

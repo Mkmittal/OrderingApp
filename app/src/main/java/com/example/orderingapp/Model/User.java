@@ -5,7 +5,7 @@ import com.example.orderingapp.Common.Common;
 public class User {
     private String Name;
     private String Password;
-    private String orderNo;
+    private String OrderNo;
 
     public User(){
     }
@@ -14,15 +14,15 @@ public class User {
     {
         Name = name;
         Password = password;
-        orderNo = order;
+        OrderNo = order;
     }
 
     public String getOrderNo() {
-        return orderNo;
+        return OrderNo;
     }
 
     public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
+        this.OrderNo = orderNo;
     }
 
     public String getName() {

@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,17 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.orderingapp.Model.Order;
+import com.example.orderingapp.Model.Items;
 import com.example.orderingapp.R;
 
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
-    private ArrayList<Order> listdata;
+    private ArrayList<Items> listdata;
     private Context context;
     private OnItemClickListener mListener;
 
-    public CartAdapter(ArrayList<Order> listdata, Context context) {
+    public CartAdapter(ArrayList<Items> listdata, Context context) {
         this.listdata = listdata;
         this.context = context;
     }
@@ -100,7 +99,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, int position) {
-        Order currentOrder = listdata.get(position);
+        Items currentOrder = listdata.get(position);
         holder.txtCartName.setText(currentOrder.getProductName());
         holder.txtCartQuantity.setText(currentOrder.getQuantity());
         holder.txtCartPrice.setText(currentOrder.getPrice());

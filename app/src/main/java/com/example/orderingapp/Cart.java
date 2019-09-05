@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.orderingapp.Common.Common;
-import com.example.orderingapp.Model.Order;
+import com.example.orderingapp.Model.Items;
 import com.example.orderingapp.ViewHolder.CartAdapter;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class Cart extends AppCompatActivity {
     TextView txtTotalPrice;
     Button placeOrderButton;
 
-    ArrayList<Order> cart = new ArrayList<>();
+    ArrayList<Items> cart = new ArrayList<>();
     CartAdapter adapter;
 
     public Cart(){
@@ -91,8 +91,8 @@ public class Cart extends AppCompatActivity {
     public void getTotal(){
         txtTotalPrice=findViewById(R.id.total);
         int total = 0;
-        for (Order order : cart)
-            total += (Integer.parseInt(order.getPrice())) * (Integer.parseInt(order.getQuantity()));
+        for (Items items : cart)
+            total += (Integer.parseInt(items.getPrice())) * (Integer.parseInt(items.getQuantity()));
         txtTotalPrice.setText(String.valueOf(total));
     }
 

@@ -1,63 +1,44 @@
 package com.example.orderingapp.Model;
 
-
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Order implements Serializable {
-    private String Image;
-    private String ProductName;
-    private String Quantity;
-    private String Price;
+    private String orderNo;
+    private String totalPrice;
+    private ArrayList<Category> orderList= new ArrayList<>();
 
-    public Order(){
+    public Order() {
     }
 
-    public Order(String image, String productName, String quantity, String price) {
-        Image = image;
-        ProductName = productName;
-        Quantity = quantity;
-        Price = price;
+    public Order(String orderNo, String totalPrice, ArrayList<Category> orderList) {
+        this.orderNo = orderNo;
+        this.totalPrice = totalPrice;
+        this.orderList = orderList;
     }
 
-    public void increaseQuantity(){
-        int quantity = Integer.parseInt(Quantity) + 1;
-        Quantity=String.valueOf(quantity);
-    }
-    public void decreaseQuantity(){
-        int quantity = Integer.parseInt(Quantity) - 1;
-            Quantity = String.valueOf(quantity);
+    public String getOrderNo() {
+        return orderNo;
     }
 
-    public String getImage() {
-        return Image;
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 
-    public void setImage(String image) {
-        Image = image;
+    public String getTotalPrice() {
+        return totalPrice;
     }
 
-    public String getProductName() {
-        return ProductName;
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
     }
 
-    public void setProductName(String productName) {
-        ProductName = productName;
+    public ArrayList<Category> getOrderList() {
+        return orderList;
     }
 
-    public String getQuantity() {
-        return Quantity;
-    }
-
-    public void setQuantity(String quantity) {
-        Quantity = quantity;
-    }
-
-    public String getPrice() {
-        return Price;
-    }
-
-    public void setPrice(String price) {
-        Price = price;
+    public void setOrderList(ArrayList<Category> orderList) {
+        this.orderList = orderList;
     }
 
 }
